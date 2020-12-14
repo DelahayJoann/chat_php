@@ -1,30 +1,32 @@
-<!-- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang='fr'>
     <head>
         <meta charset='UTF-8'>
         <meta name='viewport' content='width=device-width, initial-scale=1.0'>
         <meta http-equiv='X-UA-Compatible' content='ie=edge'>
         <link rel='stylesheet' href='public/css/style.css'>
-        <title>Glory wall</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+        integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+        <title>Chat</title>
     </head>
     
     <body>
-        <header>
-            <h1>Glory Wall of Tamikara</h1>
-            <h2>.. Parce-que vous le vallez bien ..</h2>
-            <!-- a venir: navbar-->
-<!--         </header>
-        <nav class="main-nav">
-            <ul>
-                <li><a href="wall">Wall</a></li>
-                <!-- <li><a href="feat-of-arms">Faits d'armes</a></li> -->
-                <!-- <li><a href="goldenbook">Livre d'Or</a></li>
-            </ul>
-        </nav> -->
+        
+        <?= $content ?>
 
-        <?= /* $content */ ?>
 
-<!--         <footer> &copy; Leers Mathieu ( Tamikara ) 2018 Tout droit réservé. </footer>
 
+    <!-- Script -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+        integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+        integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
+        crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/e106887b45.js" crossorigin="anonymous"></script>
+    <script src="script.js"></script>
     </body>
-</html> -->
+</html>
