@@ -8,6 +8,14 @@ namespace model;
         private $creationDate;
         private $idChat;
 
+        public function __construct($id, $authorId, $content, $creationDate, $idChat){
+            $this->id = $id;
+            $this->authorId = $authorId;
+            $this->content = $content;
+            $this->creationDate = $creationDate;
+            $this->idChat = $idChat;
+        }
+
         protected function getId(){
             return $this->id;
         }
@@ -63,16 +71,7 @@ namespace model;
             $request = $db->prepare("INSERT IGNORE INTO `messages` (`id`, `content`, `creationdate`, `author`) VALUES (NULL, :content, :creationDate, :userId, :idChat);");
             $request->execute(array(':content' => $msg->getContent(), ':creationDate' => date('Y-m-d'), ':userId' => $user->getId(), ':idChat' => $msg->getIdChat()));
         }
-        protected static function getAllMessages(int $idChat){
-            try{
-                $db = Database::connect();
-            }
-            catch(Exception $e){
-                throw $e->getMessage();
-            }
-            $request = $db->prepare("SELECT * FROM `messages` WHERE `chat_fk` = :idChat;");
-            $request->execute(array(':idChat' => $idChat));
-        }
+        
         protected static function getSpecificMessage(int $id){
             try{
                 $db = Database::connect();
