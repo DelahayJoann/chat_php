@@ -1,5 +1,5 @@
 <?php
-namespace modele;
+namespace model;
 
     class database{
         private $servername = "localhost";
@@ -17,8 +17,7 @@ namespace modele;
                 throw "Connection failed: " . $e->getMessage();
             }
         }
-        protected function addMessage(User $from, Message $msg){
-
-        }
+        protected function addMessage(User $from, Message $msg){}
+        protected function removeMessage(User $from, Message $msg){}
     }
 ?>
