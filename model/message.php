@@ -61,17 +61,7 @@ namespace model;
         }
 
         // STATIC
-        protected static function addMessage(User $user, Message $msg){
-            try{
-                $db = Database::connect();
-            }
-            catch(Exception $e){
-                throw $e->getMessage();
-            }
-            $request = $db->prepare("INSERT IGNORE INTO `messages` (`id`, `content`, `creationdate`, `author`) VALUES (NULL, :content, :creationDate, :userId, :idChat);");
-            $request->execute(array(':content' => $msg->getContent(), ':creationDate' => date('Y-m-d'), ':userId' => $user->getId(), ':idChat' => $msg->getIdChat()));
-        }
-        
+                
         protected static function getSpecificMessage(int $id){
             try{
                 $db = Database::connect();
