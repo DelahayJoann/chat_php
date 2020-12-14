@@ -13,18 +13,18 @@
             <h1>Glory Wall of Tamikara</h1>
             <h2>.. Parce-que vous le vallez bien ..</h2>
             <!-- a venir: navbar-->
-        </header>
+<!--         </header>
         <nav class="main-nav">
             <ul>
                 <li><a href="wall">Wall</a></li>
                 <!-- <li><a href="feat-of-arms">Faits d'armes</a></li> -->
-                <li><a href="goldenbook">Livre d'Or</a></li>
+                <!-- <li><a href="goldenbook">Livre d'Or</a></li>
             </ul>
-        </nav>
+        </nav> -->
 
-        <?= $content ?>
+        <?= /* $content */ ?>
 
-        <footer> &copy; Leers Mathieu ( Tamikara ) 2018 Tout droit réservé. </footer>
+<!--         <footer> &copy; Leers Mathieu ( Tamikara ) 2018 Tout droit réservé. </footer>
 
     </body>
 </html> -->
