@@ -20,7 +20,7 @@ namespace model;
                 throw $e->getMessage();
             }
             
-            $request = $db->prepare("SELECT * FROM `users` (`id`, `username`, `password`, `joindate`) WHERE `username` = :username AND `password` = :password LIMIT 0,1;");
+            $request = $db->prepare("SELECT * FROM `users` (`id`, `username`, `password`, `joindate`) WHERE `username` = :username AND `password` = :password LIMIT 1;");
             $request->execute(array(':username' => $this->getUsername(), ':password' => $this->getPassword()));
             $user = $request->fetch();
             try{
@@ -39,14 +39,14 @@ namespace model;
             session_destroy();
         }
 
-        protected function getId(){
+        protected function getId():int{
             return $this->id;
         }
         private function setId(int $id){
             $this->id = $id;
         }
 
-        protected function getUsername(){
+        protected function getUsername():string{
             return $this->username;
         }
         protected function setUsername(string $username){
@@ -54,14 +54,14 @@ namespace model;
             $this->username = $username;
         }
 
-        private function getPassword(){
+        private function getPassword():string{
             return $this->password;
         }
         protected function setPassword(string $password){
             $this->password = sha1($password);
         }
 
-        protected function getJoinDate(){
+        protected function getJoinDate():date{
             return $this->joinDate;
         }
         protected function setJoinDate(date $joinDate){

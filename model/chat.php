@@ -12,7 +12,7 @@ namespace model;
             $this->instances_[] = $this;
         }
 
-        protected static function getChats(){
+        protected static function getChats():array{
             try{
                 $db = Database::connect();
             }
@@ -26,14 +26,27 @@ namespace model;
             }
             return Chat::instances_;
         }
-        protected function getAllMessages(){
+
+        protected static function addMessage(User $user, Message $msg):Message{
             try{
                 $db = Database::connect();
             }
             catch(Exception $e){
                 throw $e->getMessage();
             }
-            $request = $db->prepare("SELECT * FROM `messages` WHERE `chat_fk` = :idChat;");
+            $request = $db->prepare("INSERT IGNORE INTO `messages` (`id`, `content`, `creationdate`, `author`) VALUES (NULL, :content, :creationDate, :userId, :idChat);");
+            $request->execute(array(':content' => $msg->getContent(), ':creationDate' => date('Y-m-d'), ':userId' => $user->getId(), ':idChat' => $msg->getIdChat()));
+            return $msg;
+        }
+
+        protected function get10LastMessages():array{
+            try{
+                $db = Database::connect();
+            }
+            catch(Exception $e){
+                throw $e->getMessage();
+            }
+            $request = $db->prepare("SELECT * FROM `messages` WHERE `chat_fk` = :idChat ORDER BY id DESC LIMIT 10;");
             $request->execute(array(':idChat' => $this->id));
             while($donnees = $request->fetch()){
                 $messages[] = new Message($donnees['id'], $donnees['content'], $donnees['creationdate'], $donnees['author'], $donnees['chat_fk']);

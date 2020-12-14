@@ -8,39 +8,43 @@ namespace model;
         private $creationDate;
         private $idChat;
 
-        public function __construct($id, $authorId, $content, $creationDate, $idChat){
-            $this->id = $id;
-            $this->authorId = $authorId;
-            $this->content = $content;
-            $this->creationDate = $creationDate;
-            $this->idChat = $idChat;
+        public function __construct(int $id, string $content, date $creationDate, int $authorId, int $idChat){
+            $this->id = $this->setId($id);
+            $this->content = $this->setContent($content);
+            $this->creationDate = $this->setCreationDate($creationDate);
+            $this->authorId = $this->setAuthorId($authorId);
+            $this->idChat = $this->setIdChat($idChat);
         }
 
-        protected function getId(){
+        protected function getId():int{
             return $this->id;
         }
-        protected function getIdChat(){
+        protected function setId(int $id){
+            $this->id = $id;
+        }
+
+        protected function getIdChat():int{
             return $this->idChat;
         }
         protected function setIdChat(int $idChat){
             $this->idChat = $idChat;
         }
 
-        protected function getContent(){
+        protected function getContent():string{
             return $this->content;
         }
         protected function setContent(string $content){
             $this->content = $content;
         }
 
-        protected function getAuthorId(){
+        protected function getAuthorId():int{
             return $this->authorId;
         }
         protected function setAuthorId(User $user){
             $this->authorId = $user->getId();
         }
 
-        protected function getCreationDate(){
+        protected function getCreationDate():date{
             return $this->creationDate;
         }
         protected function setCreationDate(date $creationDate){
@@ -62,7 +66,7 @@ namespace model;
 
         // STATIC
                 
-        protected static function getSpecificMessage(int $id){
+        protected static function getSpecificMessage(int $id):array{
             try{
                 $db = Database::connect();
             }
@@ -71,6 +75,7 @@ namespace model;
             }
             $request = $db->prepare("SELECT * FROM `messages` WHERE `id` = :id;");
             $request->execute(array(':id' => $id));
+            return $request->fetch();
         }
     }
 ?>
