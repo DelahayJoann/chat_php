@@ -59,7 +59,7 @@ require_once 'database.php';
             $request = $db->prepare("SELECT * FROM `messages` WHERE `chat_fk` = :idChat ORDER BY id DESC LIMIT 10;");
             $request->execute(array(':idChat' => $this->id));
             while($donnees = $request->fetch()){
-                $messages[] = new Message($donnees['id'], $donnees['content'], $donnees['creationdate'], $donnees['author'], $donnees['chat_fk']);
+                $messages[] = new Message(intval($donnees['id']), $donnees['content'], $donnees['creationdate'], $donnees['author'], $donnees['chat_fk']);
             }
             return  $messages; // return array of Message
         }

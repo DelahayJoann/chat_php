@@ -104,5 +104,22 @@ require_once 'database.php';
             $request = $db->prepare("INSERT IGNORE INTO `users` (`id`, `username`, `password`, `joindate`) VALUES (NULL, :username, :password, :joindate);");
             $request->execute(array(':username' => $username, ':password' => sha1($password), ':joindate' => date('Y-m-d')));
         }
+
+        public static  function getUserById($id){
+            try{
+                $db = Database::connect();
+            
+                $request = $db->prepare("SELECT * FROM `users` WHERE `id` = :id;");
+                $request->execute(array(':id' => $id ));
+                $user = $request->fetch();
+                if($user){
+                    return $user;
+                }
+                else{echo "no user";}
+            }
+            catch(\Exception $e){
+                echo "get user failed";
+            }
+        }
     }
 ?>

@@ -10,9 +10,10 @@ require_once 'database.php';
         private $creationDate;
         private $idChat;
 
-        public function __construct(string $content, int $authorId, int $idChat){
+        public function __construct(int $id = null, string $content, string $creationDate, int $authorId, int $idChat){
+            $this->setId($id);
             $this->setContent($content);
-            $this->setCreationDate();
+            $this->setCreationDate($creationDate);
             $this->setAuthorId($authorId);
             $this->setIdChat($idChat);
         }
@@ -20,7 +21,7 @@ require_once 'database.php';
         function getId():int{
             return $this->id;
         }
-        function setId(int $id){
+        function setId($id){
             $this->id = $id;
         }
 
@@ -48,8 +49,8 @@ require_once 'database.php';
         function getCreationDate():\DateTime{
             return $this->creationDate;
         }
-        function setCreationDate(){
-            $this->creationDate = date("Y-m-d h:i:s");
+        function setCreationDate($creationDate){
+            $this->creationDate = $creationDate;
         }
 
         function removeMessage(User $user){

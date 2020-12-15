@@ -1,6 +1,7 @@
 <?php
 namespace App;
     require('controller/controller.php');
+    use App\controller as C;
 
     /* if (isset($_GET['action'])) {
         if ($_GET['action'] == 'wall') {
