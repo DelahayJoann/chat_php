@@ -1,6 +1,8 @@
 <?php ob_start(); ?>
 
-<p>test</p>
+<footer>
+    test
+</footer>
 
 <?php $content = ob_get_clean(); ?>
 <?php require('template.php'); ?>
