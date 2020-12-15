@@ -1,19 +1,14 @@
 <?php
-namespace model;
-
+namespace App\model;
+date_default_timezone_set('Europe/Brussels');
     class Database{
-        private $servername = "localhost";
-        private $username = "Joann";
-        private $password = "becode";
-        private $dbname = "chat_php";
-
-        protected static function connect(){
+        public static function connect(){
             try {
-                $db = new PDO("mysql:host=$servername;dbname=$dbname;port=3306", $username, $password);
-                $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+                $db = new \PDO("mysql:host=localhost;dbname=chat_php;port=3306", "Joann", "becode");
+                $db->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
                 return $db;
             }
-            catch(PDOException $e){
+            catch(\PDOException $e){
                 throw "Connection failed: " . $e->getMessage();
             }
         }
