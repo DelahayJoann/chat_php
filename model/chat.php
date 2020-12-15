@@ -56,7 +56,7 @@ require_once 'database.php';
             catch(\Exception $e){
                 throw $e->getMessage();
             }
-            $request = $db->prepare("SELECT * FROM `messages` WHERE `chat_fk` = :idChat ORDER BY id DESC LIMIT 10;");
+            $request = $db->prepare("(SELECT * FROM `messages` WHERE `chat_fk` = :idChat ORDER BY id DESC LIMIT 10) ORDER BY id ASC;");
             $request->execute(array(':idChat' => $this->id));
             while($donnees = $request->fetch()){
                 $messages[] = new Message(intval($donnees['id']), $donnees['content'], $donnees['creationdate'], $donnees['author'], $donnees['chat_fk']);
