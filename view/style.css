@@ -21,16 +21,27 @@ body{
 #bandeauTop{
     background-color: rgba(58, 58, 58, 0.712);
     margin-top: 2rem;
-    box-shadow: 6px 0px 7px -3px rgba(0,0,0,0.55);
     height: 3.438rem;
+    box-shadow: 6px 0px 7px -3px rgba(0,0,0,0.55);
     border-top-left-radius: 15px;
     border-top-right-radius: 15px;
     color: rgb(223, 223, 223);
 }
+.buttonLogout{
+    margin-top: 0.900rem;
+    border: solid 0px;
+    border-radius: 5px;
+    background-color: #de5555;
+    color: white;
+}
+.topOffline{
+    margin-top: 0.850rem;
+}
+
 #bandeauDown{
     background-color: rgba(58, 58, 58, 0.712);
     box-shadow: 6px 7px 7px -3px rgba(0,0,0,0.55);
-    height: 3.438rem;
+    /*height: 3.438rem;*/
     border-bottom-left-radius: 15px;
     border-bottom-right-radius: 15px;
 }
@@ -43,9 +54,42 @@ body{
 #icon{
     color: #559DDE;
 }
-
 #icon:hover{
     color: #3d6f9b;
+}
+
+.buttonSignIn{
+    margin-top: 0.900rem;
+    border: solid 0px;
+    border-radius: 5px;
+    background-color: #55de6c;
+    color: white;
+}
+.buttonSignIn:hover{
+    margin-top: 0.900rem;
+    border: solid 0px;
+    border-radius: 5px;
+    background-color: #3ca04d;
+    color: white;
+}
+.buttonRegister{
+    margin-top: 0.900rem;
+    border: solid 0px;
+    border-radius: 5px;
+    background-color: #55de6c;
+    color: white;
+}
+.buttonRegister:hover{
+    margin-top: 0.900rem;
+    border: solid 0px;
+    border-radius: 5px;
+    background-color: #3ca04d;
+    color: white;
+}
+
+.message{
+    text-align: center;
+    color: rgb(223, 223, 223);
 }
 /* Boite chat */
 textarea{
