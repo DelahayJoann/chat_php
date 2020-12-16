@@ -7,7 +7,7 @@ use App\model\Chat;
 //session_start();
 
 Class Controller{
-    static function unregistered(){
+    static function unregistered(){ 
         $chats = Chat::getChats();
         $chat = $chats[0]; //temporaire -- multi chat plus tard
         $lastMessage = $chat->get10LastMessages();

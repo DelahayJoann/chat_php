@@ -1,6 +1,6 @@
 <?php
 namespace App\Model;
-use PDO;
+use PDO; 
 date_default_timezone_set('Europe/Brussels');
     class Database{
         public static function connect(){

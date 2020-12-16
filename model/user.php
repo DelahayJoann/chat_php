@@ -1,7 +1,7 @@
 <?php
 namespace App\Model;
 
-    class User{
+    class User{ 
         private $id = null;
         private $username = null;
         private $password = null;

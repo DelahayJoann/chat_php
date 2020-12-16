@@ -1,7 +1,7 @@
 <?php
 namespace App\Model;
 
-    class Message{
+    class Message{ 
         private $id;
         private $authorId;
         private $content;
