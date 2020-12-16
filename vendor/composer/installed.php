@@ -6,7 +6,7 @@
     'aliases' => 
     array (
     ),
-    'reference' => '117943c9ab4f43bbcd474c635367ac0d98f416de',
+    'reference' => 'e20330b5474a154a3a492e14e8be0a4b1e85c594',
     'name' => 'dyoan/chat_php',
   ),
   'versions' => 
@@ -18,7 +18,7 @@
       'aliases' => 
       array (
       ),
-      'reference' => '117943c9ab4f43bbcd474c635367ac0d98f416de',
+      'reference' => 'e20330b5474a154a3a492e14e8be0a4b1e85c594',
     ),
   ),
 );
