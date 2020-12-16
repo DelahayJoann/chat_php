@@ -1,25 +1,30 @@
 <?php
-namespace App;
-    require('controller/controller.php');
-    use App\controller as C;
+require 'vendor\autoload.php';
+use App\controller\Controller;
 
-    /* if (isset($_GET['action'])) {
-        if ($_GET['action'] == 'wall') {
-            pageWall();
-        }
-        else if ($_GET['action'] == 'insert'){
-            insertWall();
-        }
-        else if ($_GET['action'] == 'goldenbook') {
-            pageGolden();
-        }
-        else if ($_GET['action']== 'insertGolden'){
-            insertGolden();
+//test
+use App\model\User;
+User::addUser('aaabbbcom','abcdefghij8');
+$user = new User('aaabbbcom','abcdefghij8');
+$user->authentification();
+//---
+
+if(isset($_SESSION['username'],$_SESSION['password'])){
+    if (isset($_GET['action'])) {
+        if ($_GET['action'] == 'sendMessage') {
+            //sendMessage();
         }
         else {
-            pageWall();            
+            Controller::registered();            
         }
     }
     else {
-        pageWall();
-    } */
+        Controller::registered();
+    }
+}
+else{
+    Controller::unregistered();
+}
+       // TEST
+       $user->disconnect();
+    /*  */

@@ -1,8 +1,6 @@
 <?php
 namespace App\model;
 
-require_once 'database.php';
-
     class Chat{
         private $id;
         private $name;
