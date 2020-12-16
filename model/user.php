@@ -1,8 +1,6 @@
 <?php
 namespace App\model;
 
-require_once 'database.php';
-
     class User{
         private $id = null;
         private $username = null;

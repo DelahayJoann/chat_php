@@ -1,8 +1,6 @@
 <?php
 namespace App\model;
 
-require_once 'database.php';
-
     class Message{
         private $id;
         private $authorId;
@@ -46,7 +44,7 @@ require_once 'database.php';
             $this->authorId = $userId;
         }
 
-        function getCreationDate():\DateTime{
+        function getCreationDate():string{
             return $this->creationDate;
         }
         function setCreationDate($creationDate){
