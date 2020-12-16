@@ -1,5 +1,5 @@
 <?php
-namespace App\model;
+namespace App\Model;
 use PDO;
 date_default_timezone_set('Europe/Brussels');
     class Database{

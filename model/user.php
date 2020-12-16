@@ -1,5 +1,5 @@
 <?php
-namespace App\model;
+namespace App\Model;
 
     class User{
         private $id = null;

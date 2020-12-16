@@ -1,5 +1,5 @@
 <?php
-namespace App\model;
+namespace App\Model;
 
     class Message{
         private $id;

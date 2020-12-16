@@ -1,6 +1,6 @@
 <?php
 require 'vendor\autoload.php';
-use App\controller\Controller;
+use App\Controller\Controller;
 
 //test
 /* use App\model\User;
