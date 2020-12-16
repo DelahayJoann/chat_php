@@ -4,10 +4,11 @@ use App\controller\Controller;
 
 //test
 use App\model\User;
-User::addUser('aaabbbcom','abcdefghij8');
+//User::addUser('aaabbbcom','abcdefghij8');
 $user = new User('aaabbbcom','abcdefghij8');
 $user->authentification();
 //---
+
 
 if(isset($_SESSION['username'],$_SESSION['password'])){
     if (isset($_GET['action'])) {
