@@ -1,6 +1,3 @@
-<?php ob_start(); ?>
-
-
 <div class="modal" id="signin">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -27,8 +24,3 @@
         </div>
     </div>
 </div>
-
-
-
-<?php $content = ob_get_clean(); ?>
-<?php require('template.php'); ?>
