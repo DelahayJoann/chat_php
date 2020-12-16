@@ -3,10 +3,10 @@ require 'vendor\autoload.php';
 use App\controller\Controller;
 
 //test
-use App\model\User;
-//User::addUser('aaabbbcom','abcdefghij8');
+/* use App\model\User;
+User::addUser('aaabbbcom','abcdefghij8');
 $user = new User('aaabbbcom','abcdefghij8');
-$user->authentification();
+$user->authentification(); */
 //---
 
 
@@ -27,5 +27,5 @@ else{
     Controller::unregistered();
 }
        // TEST
-       $user->disconnect();
+       //$user->disconnect();
     /*  */
