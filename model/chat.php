@@ -1,7 +1,7 @@
 <?php
 namespace App\model;
 
-    class Chat{
+    class Chat{ 
         private $id;
         private $name;
         private static $instances_ = [];
