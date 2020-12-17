@@ -102,7 +102,7 @@ textarea{
     overflow-y: scroll;
     overflow-x: hidden;
     background-color: rgba(58, 58, 58, 0.575);
-    height: 40rem;
+    height: 35rem;
     box-shadow: 6px 0px 7px -3px rgba(0,0,0,0.55);
 }
 ::-webkit-scrollbar {
