@@ -16,7 +16,7 @@
                     <div class="form-group">
                         <label>Mot de passe :</label>
                         <input type="password" class="form-control" id="password" name="password"
-                        placeholder="Entrer un mot de passe" required>
+                        placeholder="Entrer un mot de passe." required>
                     </div>
                         <input type="submit" class="btn btn-primary" value="Inscription">
                 </form>
