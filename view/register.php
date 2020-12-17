@@ -8,7 +8,7 @@
             </div>
             <!-- Modal body -->
             <div class="modal-body">
-                <form action="index.php" method="post">
+                <form action="register" method="post">
                     <div class="form-group">
                         <label>email :</label>
                         <input type="email" class="form-control" id="email" name="email" placeholder="Entrer votre adresse email." required>

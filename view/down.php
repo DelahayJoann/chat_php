@@ -3,7 +3,7 @@
         <div class="col-12 col-sm-12 col-lg-3 mb-3">
         </div>
         <div class="col-12 col-sm-12 col-lg-6 mb-6" id="bandeauDown">
-                <form action="index.php" method="POST">
+                <form action="send" method="POST">
                     <textarea type="text" id="formMessage" name="message" placeholder="Envoyer une message"></textarea>
                     <button type="submit" id="boutonEnvoyer">
                         <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" fill="currentColor" id="icon" class="bi bi-arrow-up-circle-fill" viewBox="0 0 16 16">

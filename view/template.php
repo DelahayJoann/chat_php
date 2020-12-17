@@ -11,9 +11,10 @@
     </head>   
     <body>
         
-        <?= $top ?>
-        <?= $box ?>
-        <?= $bottom ?>
+        <?= (isset($top))? $top : ""; ?>
+        <?= (isset($box))? $box : ""; ?>
+        <?= (isset($bottom))? $bottom : ""; ?>
+        <?= (isset($modals))? $modals : ""; ?>
 
 
     <!-- Script -->

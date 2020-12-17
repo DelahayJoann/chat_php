@@ -35,16 +35,16 @@ namespace App\Model;
             return $this->name;
         }
 
-        static function addMessage(User $user, Message $msg):Message{
+        static function addMessage(Message $msg):Message{
             try{
                 $db = Database::connect();
+                $request = $db->prepare("INSERT INTO `messages` (`id`, `content`, `creationdate`, `author`, `chat_fk`) VALUES (NULL, :content, :creationDate, :userId, :idChat);");
+                $request->execute(array(':content' => $msg->getContent(), ':creationDate' => date('Y-m-d h:i:s'), ':userId' => $msg->getAuthorId(), ':idChat' => $msg->getIdChat()));
+                return $msg;
             }
             catch(\Exception $e){
                 throw $e->getMessage();
             }
-            $request = $db->prepare("INSERT IGNORE INTO `messages` (`id`, `content`, `creationdate`, `author`, `chat_fk`) VALUES (NULL, :content, :creationDate, :userId, :idChat);");
-            $request->execute(array(':content' => $msg->getContent(), ':creationDate' => date('Y-m-d h:i:s'), ':userId' => $user->getId(), ':idChat' => $msg->getIdChat()));
-            return $msg;
         }
 
         function get10LastMessages():array{
@@ -54,8 +54,8 @@ namespace App\Model;
             catch(\Exception $e){
                 throw $e->getMessage();
             }
-            $request = $db->prepare("SELECT * FROM `messages` WHERE `chat_fk` = :idChat ORDER BY id DESC LIMIT 10;");
-            // "(SELECT * FROM `messages` WHERE `chat_fk` = :idChat ORDER BY id DESC LIMIT 10) ORDER BY id ASC;"
+            $request = $db->prepare("(SELECT * FROM `messages` WHERE `chat_fk` = :idChat ORDER BY id DESC LIMIT 10) ORDER BY id ASC;");
+            // 
             $request->execute(array(':idChat' => $this->id));
             while($donnees = $request->fetch()){
                 $messages[] = new Message(intval($donnees['id']), $donnees['content'], $donnees['creationdate'], $donnees['author'], $donnees['chat_fk']);

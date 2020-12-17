@@ -2,10 +2,10 @@
 namespace App\Model;
 
     class User{ 
-        private $id = null;
-        private $username = null;
-        private $password = null;
-        private $joinDate = "0000-00-00";
+        private $id;
+        private $username;
+        private $password;
+        private $joinDate;
 
         public function __construct(string $username, string $password){
             $this->setUsername($username);
@@ -13,31 +13,31 @@ namespace App\Model;
         }
 
         function authentification(){
-            if(!isset($_SESSION)){
-                try{
-                    $db = Database::connect();
-                
-                    $request = $db->prepare("SELECT * FROM `users` WHERE (`username` = :username) AND (`password` = :password) LIMIT 1;");
-                    $request->execute(array(':username' => $this->getUsername(), ':password' => $this->getPassword() ));
-                    $user = $request->fetch();
-                    if($user){
-                        $this->setJoinDate(new \DateTime($user['joindate']));
-                        $this->setId($user['id']);
-                        session_start();
-                        $_SESSION['username'] = $this->username;
-                        $_SESSION['password'] = $this->password;
-                        echo "Connected";
-                    }
-                    else{echo "Fail to connect";}
+            try{
+                $db = Database::connect();
+
+                if (session_status() == PHP_SESSION_NONE) {
+                    session_start();
                 }
-                catch(\Exception $e){
-                    echo "Authentification failed";
+                $request = $db->prepare("SELECT * FROM `users` WHERE (`username` = :username) AND (`password` = :password) LIMIT 1;");
+                $request->execute(array(':username' => $this->getUsername(), ':password' => $this->getPassword() ));
+                $user = $request->fetch();
+    
+                if($user){
+                    $this->setJoinDate(new \DateTime($user['joindate']));
+                    $this->setId($user['id']);
+                    $_SESSION['idUser'] = $this->getId();
                 }
+                else{echo "Fail to connect";}
             }
+            catch(\Exception $e){
+                echo "Authentification failed";
+            }
+
         }
 
         function update(string $username = null, string $password = null){
-            if(isset($_SESSION['username'], $_SESSION['password'])){
+            if(isset($_SESSION['idUser'])){
                 try{
                     $db = Database::connect();
                     $user = ($username == null)?$this->getUsername():$username;
@@ -52,17 +52,16 @@ namespace App\Model;
             }
         }
 
-        function disconnect(){
-            if(isset($_SESSION['username'], $_SESSION['password'])){
-                unset($_SESSION);
+        static function disconnect(){
+            if(isset($_SESSION['idUser'])){
+                unset($_SESSION['idUser']);
                 session_destroy();
                 echo "Disconnected";
             }
         }
 
         function getId():int{
-            if(isset($_SESSION['username'], $_SESSION['password'])) return $this->id;
-            else return false;
+            return $this->id;
         }
         private function setId(int $id){
             $this->id = $id;
@@ -84,7 +83,7 @@ namespace App\Model;
         }
 
         function getJoinDate():\DateTime{
-            if(isset($_SESSION['username'], $_SESSION['password'])) return $this->joinDate;
+            if(isset($_SESSION['idUser'])) return $this->joinDate;
             else return false;
         }
         function setJoinDate(\DateTime $joinDate){
@@ -104,10 +103,9 @@ namespace App\Model;
             $request->execute(array(':username' => $username, ':password' => sha1($password), ':joindate' => date('Y-m-d')));
         }
 
-        public static  function getUserById($id){
+        public static function getUserById($id){
             try{
                 $db = Database::connect();
-            
                 $request = $db->prepare("SELECT * FROM `users` WHERE `id` = :id;");
                 $request->execute(array(':id' => $id ));
                 $user = $request->fetch();

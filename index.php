@@ -2,18 +2,17 @@
 require 'vendor\autoload.php';
 use App\Controller\Controller;
 
-//test
-/* use App\model\User;
-User::addUser('aaabbbcom','abcdefghij8');
-$user = new User('aaabbbcom','abcdefghij8');
-$user->authentification(); */
-//---
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
 
-
-if(isset($_SESSION['username'],$_SESSION['password'])){
+if(isset($_SESSION['idUser'])){
     if (isset($_GET['action'])) {
-        if ($_GET['action'] == 'sendMessage') {
-            //sendMessage();
+        if ($_GET['action'] == 'send') {
+            Controller::send();
+        }
+        elseif($_GET['action'] == 'logout'){
+            Controller::logout();
         }
         else {
             Controller::registered();            
@@ -21,6 +20,14 @@ if(isset($_SESSION['username'],$_SESSION['password'])){
     }
     else {
         Controller::registered();
+    }
+}
+elseif (isset($_GET['action'])) {
+    if ($_GET['action'] == 'register'){
+        Controller::addUser();
+    }
+    elseif ($_GET['action'] == 'login'){
+        Controller::login();
     }
 }
 else{
