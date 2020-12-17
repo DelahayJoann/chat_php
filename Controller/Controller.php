@@ -41,7 +41,7 @@ Class Controller{
     static function unregistered(){ 
         $chats = Chat::getChats();
         $chat = $chats[0]; //temporaire -- multi chat plus tard
-        $lastMessage = $chat->get10LastMessages();
+        $lastMessage = $chat->getLastMessages();
         $msgs = '';
         
         ob_start();
@@ -84,7 +84,7 @@ Class Controller{
         $chats = Chat::getChats();
         $chat = $chats[0]; //temporaire -- multi chat plus tard
         
-        $lastMessage = $chat->get10LastMessages();
+        $lastMessage = $chat->getLastMessages();
         $msgs = '';
         $user = User::getUserById($_SESSION['idUser'])['username'];
         ob_start();

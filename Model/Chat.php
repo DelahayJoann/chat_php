@@ -47,20 +47,20 @@ namespace App\Model;
             }
         }
 
-        function get10LastMessages():array{
+        function getLastMessages():array{
             try{
                 $db = Database::connect();
             }
             catch(\Exception $e){
                 throw $e->getMessage();
             }
-            $request = $db->prepare("(SELECT * FROM `messages` WHERE `chat_fk` = :idChat ORDER BY id DESC LIMIT 10) ORDER BY id ASC;");
+            $request = $db->prepare("SELECT * FROM `messages` WHERE `chat_fk` = :idChat ORDER BY id DESC LIMIT 50;");
             // 
             $request->execute(array(':idChat' => $this->id));
             while($donnees = $request->fetch()){
                 $messages[] = new Message(intval($donnees['id']), $donnees['content'], $donnees['creationdate'], $donnees['author'], $donnees['chat_fk']);
             }
-            return  $messages; // return array of Message
+            return  array_reverse($messages); // return array of Message
         }
     }
 ?>
