@@ -70,7 +70,7 @@ Class Controller{
         $msgs = '';
         
         ob_start();
-        require 'view\top_offline.php';
+        require 'view/top_offline.php';
         $top = ob_get_clean();
 
         ob_start();
@@ -80,25 +80,25 @@ Class Controller{
             $username = User::getUserById($msg->getAuthorId())['username'];
             $creationdate = $msg->getCreationDate();
     
-            require 'view\message_other.php';
+            require 'view/message_other.php';
         }
         
         $msgs = ob_get_clean();
         
         ob_start();
-        require 'view\box.php';
+        require 'view/box.php';
         $box = ob_get_clean();
 
         ob_start();
-        require 'view\down_offline.php';
+        require 'view/down_offline.php';
         $bottom = ob_get_clean();
         
         ob_start();
-        require 'view\sign_in.php';
-        require 'view\register.php';
+        require 'view/sign_in.php';
+        require 'view/register.php';
         $modals = ob_get_clean();
 
-        require 'view\template.php';
+        require 'view/template.php';
         ob_end_flush();
         
     }
@@ -113,7 +113,7 @@ Class Controller{
         $msgs = '';
         $user = User::getUserById($_SESSION['idUser'])['username'];
         ob_start();
-        require 'view\top.php';
+        require 'view/top.php';
         $top = ob_get_clean();
 
         ob_start();
@@ -124,23 +124,23 @@ Class Controller{
             $creationdate = $msg->getCreationDate();
     
             if($msg->getAuthorId() == $_SESSION['idUser']){
-                require 'view\message.php';
+                require 'view/message.php';
             }
             else{
-                require 'view\message_other.php';
+                require 'view/message_other.php';
             }
         }
         $msgs = ob_get_clean();
         
         ob_start();
-        require 'view\box.php';
+        require 'view/box.php';
         $box = ob_get_clean();
 
         ob_start();
-        require 'view\down.php';
+        require 'view/down.php';
         $bottom = ob_get_clean();
 
-        require 'view\template.php';
+        require 'view/template.php';
         ob_end_flush();
     }
 }
