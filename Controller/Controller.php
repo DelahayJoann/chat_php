@@ -1,9 +1,9 @@
 <?php
 namespace App\Controller;
 
-use App\model\User;
-use App\model\Message;
-use App\model\Chat;
+use App\Model\User;
+use App\Model\Message;
+use App\Model\Chat;
 
 Class Controller{
     static function addUser(){
