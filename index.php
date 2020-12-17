@@ -1,5 +1,5 @@
 <?php
-require 'vendor\autoload.php';
+require 'vendor/autoload.php';
 use App\Controller\Controller;
 
 if (session_status() == PHP_SESSION_NONE) {
@@ -13,6 +13,9 @@ if(isset($_SESSION['idUser'])){
         }
         elseif($_GET['action'] == 'logout'){
             Controller::logout();
+        }
+        elseif($_GET['action'] == 'home'){
+            Controller::registered();
         }
         else {
             Controller::registered();            
@@ -28,6 +31,12 @@ elseif (isset($_GET['action'])) {
     }
     elseif ($_GET['action'] == 'login'){
         Controller::login();
+    }
+    elseif($_GET['action'] == 'home'){
+        Controller::unregistered();
+    }
+    else{
+        Controller::unregistered();
     }
 }
 else{

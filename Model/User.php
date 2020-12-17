@@ -2,7 +2,7 @@
 namespace App\Model;
 
     class User{ 
-        private $id;
+        private $id=null;
         private $username;
         private $password;
         private $joinDate;
