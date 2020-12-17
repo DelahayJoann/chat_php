@@ -1,5 +1,5 @@
 <?php
-namespace App\controller;
+namespace App\Controller;
 
 use App\model\User;
 use App\model\Message;
@@ -7,15 +7,14 @@ use App\model\Chat;
 //session_start();
 
 Class Controller{
-    static function unregistered(){
+    static function unregistered(){ 
         $chats = Chat::getChats();
         $chat = $chats[0]; //temporaire -- multi chat plus tard
         $lastMessage = $chat->get10LastMessages();
         $msgs = '';
-        $username = "Unregistred";
         
         ob_start();
-        require 'view\top.php';
+        require 'view\top_offline.php';
         $top = ob_get_clean();
 
         ob_start();
@@ -35,7 +34,7 @@ Class Controller{
         $box = ob_get_clean();
 
         ob_start();
-        require 'view\down.php';
+        require 'view\down_offline.php';
         $bottom = ob_get_clean();
 
         require 'view\template.php';

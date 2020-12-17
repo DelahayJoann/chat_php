@@ -1,13 +1,14 @@
 <?php
 require 'vendor\autoload.php';
-use App\controller\Controller;
+use App\Controller\Controller;
 
 //test
-use App\model\User;
+/* use App\model\User;
 User::addUser('aaabbbcom','abcdefghij8');
 $user = new User('aaabbbcom','abcdefghij8');
-$user->authentification();
+$user->authentification(); */
 //---
+
 
 if(isset($_SESSION['username'],$_SESSION['password'])){
     if (isset($_GET['action'])) {
@@ -26,5 +27,5 @@ else{
     Controller::unregistered();
 }
        // TEST
-       $user->disconnect();
+       //$user->disconnect();
     /*  */

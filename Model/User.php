@@ -1,7 +1,7 @@
 <?php
-namespace App\model;
+namespace App\Model;
 
-    class User{
+    class User{ 
         private $id = null;
         private $username = null;
         private $password = null;
@@ -99,7 +99,8 @@ namespace App\model;
             catch(Exception $e){
                 throw $e->getMessage();
             }
-            $request = $db->prepare("INSERT IGNORE INTO `users` (`id`, `username`, `password`, `joindate`) VALUES (NULL, :username, :password, :joindate);");
+            $request = $db->prepare("INSERT INTO `users` (`id`, `username`, `password`, `joindate`) VALUES (NULL, :username, :password, :joindate);");
+            // "INSERT IGNORE INTO `users` (`id`, `username`, `password`, `joindate`) VALUES (NULL, :username, :password, :joindate);"
             $request->execute(array(':username' => $username, ':password' => sha1($password), ':joindate' => date('Y-m-d')));
         }
 
