@@ -1,5 +1,5 @@
 <?php
-require 'vendor\autoload.php';
+require 'vendor/autoload.php';
 use App\Controller\Controller;
 
 if (session_status() == PHP_SESSION_NONE) {
