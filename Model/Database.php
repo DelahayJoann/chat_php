@@ -8,8 +8,7 @@ date_default_timezone_set('Europe/Brussels');
                 /* $db = new \PDO("mysql:host=localhost;dbname=chat_php;port=3306", "Joann", "becode");
                 $db->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
                 return $db; */
-                $db = new PDO("sqlite:./".dirname(__FILE__)."/db.db");
-                echo dirname(__FILE__);
+                $db = new PDO("sqlite:".dirname(__FILE__)."/db.db");
                 $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
                 return $db;
             }

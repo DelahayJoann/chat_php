@@ -7,22 +7,45 @@ use App\Model\Chat;
 
 Class Controller{
     static function addUser(){
-        USER::addUser($_POST['email'],$_POST['password']);
-        $user = new User($_POST['email'],$_POST['password']);
-        $user->authentification();
-        $_POST = array();
-        self::registered();
+        if(isset($_POST['email'],$_POST['password']) && !isset($_SESSION['idUser'])){
+            USER::addUser($_POST['email'],$_POST['password']);
+            $user = new User($_POST['email'],$_POST['password']);
+            $user->authentification();
+            $_POST = array();
+            if($user->getId()){
+                self::registered();
+            }
+            else{
+                self::unregistered();
+            }
+        }
+        else{
+            if (isset($_SESSION['idUser'])){self::registered();}
+            else {self::unregistered();}
+        }
     }
 
     static function login(){
-        $user = new User($_POST['email'],$_POST['password']);
-        $user->authentification();
-        $_POST = array();
-        self::registered();
+        if(isset($_POST['email'],$_POST['password'])){
+            $user = new User($_POST['email'],$_POST['password']);
+            $user->authentification();
+            $_POST = array();
+            if($user->getId()){
+                self::registered();
+            }
+            else{
+                self::unregistered();
+            }
+        }
+        else{
+            self::unregistered();
+        }
     }
     static function logout(){
-        User::disconnect();
-        $_POST = array();
+        if(isset($_SESSION['idUser'])){
+            User::disconnect();
+            $_POST = array();
+        }
         self::unregistered();
     }
 
@@ -31,9 +54,11 @@ Class Controller{
             session_start();
         }
         if(isset($_SESSION['idUser'])){
-            $chats = Chat::getChats();
-            $msg = new Message(null, $_POST['message'], date('Y-m-d h:i:s'), $_SESSION['idUser'], $chats[0]->getId() );
-            Chat::addMessage($msg);
+            if(isset($_POST['message'])){
+                $chats = Chat::getChats();
+                $msg = new Message(null, $_POST['message'], date('Y-m-d h:i:s'), $_SESSION['idUser'], $chats[0]->getId() );
+                Chat::addMessage($msg);
+            }
             self::registered();
         }
     }
