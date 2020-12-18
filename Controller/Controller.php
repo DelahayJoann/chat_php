@@ -70,7 +70,7 @@ Class Controller{
             self::sanitization();
             if(isset($_POST['message'])){
                 $chats = Chat::getChats();
-                $msg = new Message(null, $_POST['message'], date('Y-m-d h:i:s'), $_SESSION['idUser'], $chats[0]->getId() );
+                $msg = new Message(null, $_POST['message'], date('Y-m-d H:i:s'), $_SESSION['idUser'], $chats[0]->getId() );
                 Chat::addMessage($msg);
             }
             self::registered();
@@ -82,22 +82,24 @@ Class Controller{
         $chat = $chats[0]; //temporaire -- multi chat plus tard
         $lastMessage = $chat->getLastMessages();
         $msgs = '';
-        
+
         ob_start();
         require 'view/top_offline.php';
         $top = ob_get_clean();
-
+        
         ob_start();
 
-        foreach($lastMessage as $msg){
-            $content = $msg->getContent();
-            $username = User::getUserById($msg->getAuthorId())['username'];
-            $creationdate = $msg->getCreationDate();
-    
-            require 'view/message_other.php';
-        }
+            foreach($lastMessage as $msg){
+                $id = $msg->getId();
+                $content = $msg->getContent();
+                $username = User::getUserById($msg->getAuthorId())['username'];
+                $creationdate = $msg->getCreationDate();
         
+                require 'view/message_other.php';
+            }      
         $msgs = ob_get_clean();
+
+        $_SESSION['LastMessageId']= $id;
         
         ob_start();
         require 'view/box.php';
@@ -113,49 +115,105 @@ Class Controller{
         $modals = ob_get_clean();
 
         require 'view/template.php';
-        ob_end_flush();
-        
+        ob_flush();
+        ob_end_clean();
     }
     static function registered(){
-        if (session_status() == PHP_SESSION_NONE) {
-            session_start();
+        if(isset($_SESSION['idUser'])){
+            if (session_status() == PHP_SESSION_NONE) {
+                session_start();
+            }
+            $chats = Chat::getChats();
+            $chat = $chats[0]; //temporaire -- multi chat plus tard
+            $lastMessage = $chat->getLastMessages();
+            $msgs = '';
+            $user = User::getUserById($_SESSION['idUser'])['username'];
+            ob_start();
+            require 'view/top.php';
+            $top = ob_get_clean();
+
+            ob_start();
+                foreach($lastMessage as $msg){
+                    $id = $msg->getId();
+                    $content = $msg->getContent();
+                    $username = User::getUserById($msg->getAuthorId())['username'];
+                    $creationdate = $msg->getCreationDate();
+            
+                    if($msg->getAuthorId() == $_SESSION['idUser']){
+                        require 'view/message.php';
+                    }
+                    else{
+                        require 'view/message_other.php';
+                    }
+                }
+            $msgs = ob_get_clean();
+
+            $_SESSION['LastMessageId']= $id;
+            
+            ob_start();
+            require 'view/box.php';
+            $box = ob_get_clean();
+
+            ob_start();
+            require 'view/down.php';
+            $bottom = ob_get_clean();
+
+            require 'view/template.php';
+            ob_flush();
+            ob_end_clean();
         }
-        $chats = Chat::getChats();
-        $chat = $chats[0]; //temporaire -- multi chat plus tard
-        
-        $lastMessage = $chat->getLastMessages();
-        $msgs = '';
-        $user = User::getUserById($_SESSION['idUser'])['username'];
-        ob_start();
-        require 'view/top.php';
-        $top = ob_get_clean();
-
-        ob_start();
-
-        foreach($lastMessage as $msg){
-            $content = $msg->getContent();
-            $username = User::getUserById($msg->getAuthorId())['username'];
-            $creationdate = $msg->getCreationDate();
-    
-            if($msg->getAuthorId() == $_SESSION['idUser']){
-                require 'view/message.php';
+        else {
+            self::unregistered();
+        }
+    }
+    static function refresh(){
+        if(Chat::getLastIdMessage() > $_SESSION['LastMessageId']){
+            $_SESSION['diff'] = Chat::getLastIdMessage() - $_SESSION['LastMessageId'];
+            if(isset($_SESSION['idUser'])){
+                self::getMessages(true);
             }
             else{
-                require 'view/message_other.php';
+                self::getMessages(false);
             }
         }
-        $msgs = ob_get_clean();
+        else{
+            false;
+        }
+    }
+
+    // Refresh prupose
+    static function getMessages(bool $auth = false){ // true = identified
+        $chats = Chat::getChats();
+        $chat = $chats[0]; //temporaire -- multi chat plus tard
+        $lastMessage = $chat->getLastMessages();
+        $msgs = '';
+        if ($auth){
+            foreach($lastMessage as $msg){
+                $id = $msg->getId();
+                $content = $msg->getContent();
+                $username = User::getUserById($msg->getAuthorId())['username'];
+                $creationdate = $msg->getCreationDate();
         
-        ob_start();
-        require 'view/box.php';
-        $box = ob_get_clean();
-
-        ob_start();
-        require 'view/down.php';
-        $bottom = ob_get_clean();
-
-        require 'view/template.php';
-        ob_end_flush();
+                if($msg->getAuthorId() == $_SESSION['idUser']){
+                    require 'view/message.php';
+                }
+                else{
+                    require 'view/message_other.php';
+                }
+            }
+            $_SESSION['LastMessageId']= $id;
+        
+        }else{
+            foreach($lastMessage as $msg){
+                $id = $msg->getId();
+                $content = $msg->getContent();
+                $username = User::getUserById($msg->getAuthorId())['username'];
+                $creationdate = $msg->getCreationDate();
+        
+                require 'view/message_other.php';
+            }
+            $_SESSION['LastMessageId']= $id;
+        }
     }
 }
 ?>

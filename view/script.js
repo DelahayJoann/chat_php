@@ -10,10 +10,13 @@ var auto_refresh_other = setInterval(
     }, 1000);*/
 
 
-function writeInDiv(text) {
+function writeInDiv(reponseArray) {
     var objet = document.getElementById('box');
-    objet.innerHTML = text;
+    objet.innerHTML = reponseArray;
 }
+//Scrollbar en bas par défaut (initial).
+scrollDown = document.getElementById('box');
+scrollDown.scrollTop = scrollDown.scrollHeight;
 
 function ajax() {
     var xhr = null;
@@ -24,12 +27,19 @@ function ajax() {
     else if (window.ActiveXObject) {
         xhr = new ActiveXObject("Microsoft.XMLHTTP");
     }
-    xhr.open("GET", "../model/Message.php", false);
+    xhr.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200 && this.response != false) {
+            writeInDiv(this.responseText);
+            scrollDown = document.getElementById('box');
+            scrollDown.scrollTop = scrollDown.scrollHeight;
+            console.log('!new msg!');
+        }
+        else{
+            console.log('no new msg');
+        }
+    };
+    xhr.open("GET", "./index.php?action=refresh", true);
     xhr.send(null);
-    writeInDiv(xhr.responseText);
-    setInterval("ajax()", 1000);
+    setTimeout(ajax, 5000);
 }
-
-//Scrollbar en bas par défaut.
-scrollDown = document.getElementById('box');
-scrollDown.scrollTop = scrollDown.scrollHeight;
+ajax();
