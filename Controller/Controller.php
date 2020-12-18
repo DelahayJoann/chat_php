@@ -6,7 +6,19 @@ use App\Model\Message;
 use App\Model\Chat;
 
 Class Controller{
+
+    static function sanitization(){
+        if(isset($_POST['email'],$_POST['password'],$_POST['message'])){
+            $email = filter_var($_POST['email'], FILTER_SANITIZE_EMAIL);
+            $password = filter_var($_POST['password'], FILTER_SANITIZE_STRING);
+        }
+        if(isset($_POST['message'])){
+            $msg = filter_var($_POST['message'], FILTER_SANITIZE_STRING);
+        }
+    }
+
     static function addUser(){
+        self::sanitization();
         if(isset($_POST['email'],$_POST['password']) && !isset($_SESSION['idUser'])){
             USER::addUser($_POST['email'],$_POST['password']);
             $user = new User($_POST['email'],$_POST['password']);
@@ -26,6 +38,7 @@ Class Controller{
     }
 
     static function login(){
+        self::sanitization();
         if(isset($_POST['email'],$_POST['password'])){
             $user = new User($_POST['email'],$_POST['password']);
             $user->authentification();
@@ -54,6 +67,7 @@ Class Controller{
             session_start();
         }
         if(isset($_SESSION['idUser'])){
+            self::sanitization();
             if(isset($_POST['message'])){
                 $chats = Chat::getChats();
                 $msg = new Message(null, $_POST['message'], date('Y-m-d h:i:s'), $_SESSION['idUser'], $chats[0]->getId() );
@@ -63,7 +77,7 @@ Class Controller{
         }
     }
 
-    static function unregistered(){ 
+    static function unregistered(){
         $chats = Chat::getChats();
         $chat = $chats[0]; //temporaire -- multi chat plus tard
         $lastMessage = $chat->getLastMessages();

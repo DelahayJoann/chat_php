@@ -31,7 +31,7 @@ namespace App\Model;
                 else{echo "Fail to connect";}
             }
             catch(\Exception $e){
-                echo "Authentification failed";
+                //echo "Authentification failed";
             }
 
         }
@@ -47,7 +47,7 @@ namespace App\Model;
                     $this->disconnect();
                 }
                 catch(\Exception $e){
-                    echo "Username already in use";
+                    //echo "Username already in use";
                 }
             }
         }
@@ -56,7 +56,7 @@ namespace App\Model;
             if(isset($_SESSION['idUser'])){
                 unset($_SESSION['idUser']);
                 session_destroy();
-                echo "Disconnected";
+                //echo "Disconnected";
             }
         }
 
@@ -115,7 +115,7 @@ namespace App\Model;
                 else{echo "no user";}
             }
             catch(\Exception $e){
-                echo "get user failed";
+                //echo "get user failed";
             }
         }
     }
