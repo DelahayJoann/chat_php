@@ -128,7 +128,7 @@ textarea{
     height: 2.5rem;
     vertical-align: middle;
 }
-#userMessage{
+.userMessage{
     color: white;
     background-color: #559DDE;
     border-radius: 10px;
@@ -136,7 +136,7 @@ textarea{
     text-align: right;
     margin-bottom: 10px;
 }
-#otherMessage{
+.otherMessage{
     background-color: #cecece9d;
     border-radius: 10px;
     border-bottom-left-radius: 0;

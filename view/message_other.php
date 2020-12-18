@@ -1,6 +1,6 @@
         <!-- Template message other -->
         <div class="row">
-            <div class="col-12 col-sm-12 col-lg-8 mb-8" id="otherMessage">
+            <div class="col-12 col-sm-12 col-lg-8 mb-8 otherMessage" id="<?= $id ?>">
                 <p id="message">
                     <?= $content ?>
                 </p>

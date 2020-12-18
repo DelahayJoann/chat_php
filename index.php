@@ -17,6 +17,9 @@ if(isset($_SESSION['idUser'])){
         elseif($_GET['action'] == 'home'){
             Controller::registered();
         }
+        elseif($_GET['action'] == 'refresh'){
+            Controller::refresh();
+        }
         else {
             Controller::registered();            
         }
@@ -34,6 +37,9 @@ elseif (isset($_GET['action'])) {
     }
     elseif($_GET['action'] == 'home'){
         Controller::unregistered();
+    }
+    elseif($_GET['action'] == 'refresh'){
+        Controller::refresh();
     }
     else{
         Controller::unregistered();
