@@ -5,7 +5,7 @@
 - Repository : `Chat_PHP`
 - Sheet 7 : [ici](https://docs.google.com/spreadsheets/d/1x4txdnE7CdGMdlrZtPZeXBoBkKb4TYj4NPz-4UhSOew/edit?usp=sharing)
 
-- Heroku: [](https://becode-chat-php.herokuapp.com/)
+- Heroku: [temporary result](https://becode-chat-php.herokuapp.com/)
 
 ## Group
 - Groupe 3: Joann et Thomas
