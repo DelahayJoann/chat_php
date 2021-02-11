@@ -51,4 +51,4 @@ Your boss asks you to design a chat so that you can communicate directly with co
 - Create a database
 - Develop the back end of a web application
 
-![](https://media.giphy.com/media/3oFzlUxAjIc3JvQvJK/giphy.gif)
+![](![Ceci est un exemple d’image](https://example.com/bild.jpg))
